@@ -1,0 +1,256 @@
+/* ==========================================================
+   CBT THEME & LANDING / AUTH LAYOUT STYLES
+========================================================== */
+
+body.cbt-theme {
+    background: url('/images/background-cbt.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    color: #2b2b2b;
+}
+
+.cbt-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 15px 80px;
+    width: 100%;
+}
+
+/* Titles */
+.cbt-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #064e1b;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.cbt-subtitle-1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 2px;
+}
+
+.cbt-subtitle-2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #064e1b;
+    margin-bottom: 12px;
+}
+
+/* Decorative Line with Ornament */
+.cbt-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto;
+    width: 220px;
+    position: relative;
+}
+
+.cbt-divider::before,
+.cbt-divider::after {
+    content: "";
+    flex: 1;
+    height: 3px;
+    border-top: 1px solid #0f5426;
+    border-bottom: 1px solid #0f5426;
+}
+
+.cbt-divider-icon {
+    padding: 0 10px;
+    color: #0f5426;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Cards */
+.cbt-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 35px 30px;
+    transition: all 0.3s ease;
+}
+
+.cbt-choice-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    padding: 35px 20px;
+    text-align: center;
+    text-decoration: none !important;
+    display: block;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+}
+
+.cbt-choice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+}
+
+.cbt-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #0f5426;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: #0f5426;
+    font-size: 38px;
+    background: rgba(15, 84, 38, 0.05);
+}
+
+.cbt-card-header-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.cbt-card-header-badge .cbt-icon-circle-sm {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #0f5426;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f5426;
+    font-size: 24px;
+    background: rgba(15, 84, 38, 0.05);
+    flex-shrink: 0;
+}
+
+.cbt-card-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #064e1b;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* Buttons */
+.btn-cbt-main {
+    background-color: #0f5426;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.8px;
+    padding: 12px 35px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(15, 84, 38, 0.25);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.btn-cbt-main:hover,
+.btn-cbt-main:focus {
+    background-color: #093b1a;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(15, 84, 38, 0.35);
+}
+
+.btn-cbt-admin {
+    background: #ffffff;
+    color: #0f5426;
+    border: 1.5px solid #0f5426;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.btn-cbt-admin:hover {
+    background: #f0fdf4;
+    color: #064e1b;
+    border-color: #064e1b;
+}
+
+/* Form Inputs */
+.cbt-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+
+.cbt-input-group:focus-within {
+    border-color: #0f5426;
+    box-shadow: 0 0 0 3px rgba(15, 84, 38, 0.15);
+}
+
+.cbt-input-group .input-icon-left {
+    padding: 10px 14px;
+    color: #64748b;
+    font-size: 18px;
+}
+
+.cbt-input-group .form-control {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 12px 14px 12px 0;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+.cbt-input-group .toggle-password {
+    padding: 10px 14px;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.cbt-input-group .toggle-password:hover {
+    color: #0f5426;
+}
+
+/* Footer Bar */
+.cbt-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #02541E;
+    color: #ffffff;
+    padding: 12px 35px;
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .cbt-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+        padding: 10px 15px;
+    }
+}

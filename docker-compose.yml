@@ -1,0 +1,87 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ujian-online-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./storage:/var/www/html/storage
+      - ./.env:/var/www/html/.env:ro
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
+      APP_URL: "${APP_URL:-http://localhost:8080}"
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: db_ujian_online
+      DB_USERNAME: postgres
+      DB_PASSWORD: "${DB_PASSWORD:?Buat file .env dari .env.example lalu isi DB_PASSWORD}"
+      SESSION_DRIVER: database
+      QUEUE_CONNECTION: database
+      CACHE_STORE: file
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "php artisan storage:link || true &&
+             php artisan migrate --force &&
+             php artisan db:seed --force &&
+             php artisan serve --host=0.0.0.0 --port=8080"
+    networks:
+      - ujian-network
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ujian-online-queue
+    restart: unless-stopped
+    volumes:
+      - ./storage:/var/www/html/storage
+    environment:
+      APP_ENV: local
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: db_ujian_online
+      DB_USERNAME: postgres
+      DB_PASSWORD: "${DB_PASSWORD:?Buat file .env dari .env.example lalu isi DB_PASSWORD}"
+      QUEUE_CONNECTION: database
+      CACHE_STORE: file
+    depends_on:
+      db:
+        condition: service_healthy
+    command: php artisan queue:work --tries=3 --timeout=90
+    networks:
+      - ujian-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: ujian-online-db
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: db_ujian_online
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "${DB_PASSWORD:?Buat file .env dari .env.example lalu isi DB_PASSWORD}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_ujian_online"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ujian-network
+
+networks:
+  ujian-network:
+    driver: bridge
+
+volumes:
+  pgdata:

@@ -1,0 +1,144 @@
+@page {
+    size: A4 portrait;
+    margin: 8mm 8mm;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8.5pt;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.grid-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px 8px;
+    table-layout: fixed;
+}
+
+.card-td {
+    width: 50%;
+    vertical-align: top;
+}
+
+.card-box {
+    border: 1.5px solid #111111;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* Header Kop */
+.header-tbl {
+    width: 100%;
+    border-bottom: 2.5px double #111111;
+    padding-bottom: 5px;
+    margin-bottom: 6px;
+}
+
+.title-school {
+    font-size: 10pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+.title-exam {
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: #0d6efd;
+    text-transform: uppercase;
+    margin: 2px 0 0 0;
+    text-align: center;
+}
+
+.title-ta {
+    font-size: 7.5pt;
+    color: #555555;
+    margin: 1px 0 0 0;
+    text-align: center;
+}
+
+/* Body Biodata */
+.body-tbl {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.foto-td {
+    width: 62px;
+    vertical-align: top;
+}
+
+.foto-box {
+    width: 58px;
+    height: 75px;
+    border: 1px dashed #aaaaaa;
+    background-color: #f8f9fa;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 7.5pt;
+    color: #777777;
+    border-radius: 4px;
+}
+
+.bio-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+}
+
+.bio-tbl td {
+    padding: 2px 3px;
+    vertical-align: top;
+}
+
+.label-td {
+    width: 75px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.code-badge {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 8.5pt;
+    background-color: #e9ecef;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #111111;
+}
+
+/* Footer Tanda Tangan */
+.footer-tbl {
+    width: 100%;
+    margin-top: 6px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 5px;
+    font-size: 7pt;
+}
+
+.sig-box {
+    text-align: center;
+    width: 135px;
+    white-space: nowrap;
+}
+
+.sig-space {
+    height: 25px;
+}
+
+.sig-name {
+    font-weight: bold;
+    font-size: 8pt;
+    white-space: nowrap;
+}

@@ -1,0 +1,176 @@
+/* ==========================================================
+   RESPONSIVE / MOBILE IMPROVEMENTS (ADMIN, GURU, SISWA)
+========================================================== */
+
+/* ----------------------------------------------------------
+   SIDEBAR OFF-CANVAS DRAWER (mobile & tablet)
+---------------------------------------------------------- */
+
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.sidebar-backdrop.show {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 991.98px) {
+
+    .wrapper > .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 270px !important;
+        max-width: 85vw;
+        margin-left: 0 !important;
+        z-index: 1050;
+        transform: translateX(-100%);
+        transition: transform .3s ease;
+        overflow-y: auto;
+        min-height: 100vh;
+        box-shadow: 0 0 25px rgba(0, 0, 0, .25);
+    }
+
+    .wrapper > .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    /* restore sidebar text inside the drawer (guru collapsed variant) */
+    .wrapper > .sidebar .sidebar-header h5,
+    .wrapper > .sidebar .sidebar-header small,
+    .wrapper > .sidebar .menu li a .menu-label,
+    .wrapper > .sidebar .menu li a span {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .wrapper > .sidebar .submenu li a {
+        justify-content: flex-start;
+        padding-left: 40px !important;
+    }
+
+    /* keep main full width on mobile */
+    .wrapper > .main {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* content padding */
+    .content,
+    .main-content {
+        padding: 16px !important;
+    }
+
+    /* ---- Navbar on mobile ---- */
+    .navbar {
+        height: 60px !important;
+        padding: 0 12px !important;
+    }
+
+    .navbar .navbar-brand {
+        font-size: .95rem;
+    }
+
+    /* smaller page title on small screens */
+    .navbar h5 {
+        font-size: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 46vw;
+    }
+
+    /* dropdown menu fits viewport */
+    .dropdown-menu {
+        min-width: 200px;
+    }
+
+    .siswa-navbar .dropdown-menu {
+        min-width: 160px;
+    }
+
+    /* stat / summary cards */
+    .col-md-3.mb-4,
+    .col-md-3 .mb-4 {
+        margin-bottom: 10px !important;
+    }
+
+    /* page header buttons stack & wrap nicely */
+    .page-header {
+        align-items: flex-start !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+
+    /* exam timer row fits small phones */
+    .navbar-nav .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+
+    /* sisiwa navbar: hide long text */
+    .navbar .d-none.d-sm-block small {
+        display: none !important;
+    }
+
+    /* ---- Student pages: compact on phones ---- */
+    .siswa-navbar .navbar-brand {
+        font-size: .9rem;
+    }
+
+    .siswa-navbar .navbar-nav .nav-link {
+        padding-right: 0 !important;
+    }
+
+    .card-body.p-4 {
+        padding: 16px !important;
+    }
+
+    .card-header.py-3,
+    .card-body.py-3 {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .soal-card .card-body {
+        padding: 12px !important;
+    }
+
+    .soal-card .card-footer .btn {
+        padding: 10px 14px;
+        font-size: .9rem;
+    }
+
+    .soal-card .pilihan-label {
+        padding: 12px !important;
+        font-size: .9rem;
+    }
+
+    /* ---- Auth / Login on small phones ---- */
+    .cbt-container {
+        padding: 24px 12px 90px;
+    }
+
+    .cbt-card {
+        padding: 24px 18px;
+    }
+
+    .cbt-title {
+        font-size: 1.6rem;
+    }
+
+    .cbt-footer {
+        padding: 10px 12px;
+        font-size: .8rem;
+    }
+}

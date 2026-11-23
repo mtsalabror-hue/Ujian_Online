@@ -1,0 +1,10 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+@import "./admin.css";
+@import "./siswa.css";
+@import "./login.css";
+@import "./dashboard.css";
+@import "./guru.css";
+
+@import "./responsive.css";

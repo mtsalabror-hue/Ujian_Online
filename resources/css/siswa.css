@@ -1,0 +1,91 @@
+/* ==========================================================
+   PANEL SISWA
+   ========================================================== */
+
+/* Navbar siswa: selalu di atas konten */
+.siswa-navbar {
+    z-index: 1030;
+}
+
+.siswa-navbar .navbar-brand {
+    font-size: 1.05rem;
+}
+
+/* Dropdown profil/logout */
+.siswa-navbar .dropdown-toggle::after {
+    margin-left: 2px;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.siswa-navbar .dropdown-menu {
+    overflow: hidden;
+    min-width: 160px;
+}
+
+.siswa-navbar .dropdown-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.siswa-navbar .dropdown-item:hover {
+    background: #f1f5f9;
+    color: #dc3545;
+}
+
+.siswa-navbar .btn-logout {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.siswa-navbar .dropdown-menu form {
+    margin: 0;
+}
+
+/* Kunci layout: selalu satu baris di semua ukuran layar */
+.siswa-navbar .container-fluid {
+    flex-wrap: nowrap;
+}
+
+.siswa-navbar .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.siswa-navbar .navbar-nav .nav-item.dropdown {
+    position: relative;
+}
+
+.siswa-navbar .navbar-nav .nav-link {
+    white-space: nowrap;
+}
+
+/* Responsive: dropdown tetap tampil di atas kartu ujian di HP */
+@media (max-width: 991.98px) {
+    .wrapper .siswa-navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+    }
+
+    .siswa-navbar .navbar-brand {
+        font-size: .9rem;
+        margin-left: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .siswa-navbar .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: auto;
+        right: 0;
+    }
+}
