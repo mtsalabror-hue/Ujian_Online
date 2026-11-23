@@ -3,8 +3,12 @@
 ========================================================== */
 
 body.cbt-theme {
-    background: url('/images/background-cbt.png') no-repeat center center fixed;
-    background-size: cover;
+    /* Latar murni kodingan (CSS), tanpa gambar background-cbt.png */
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.14) 0, rgba(255, 255, 255, 0.14) 120px, transparent 121px),
+        radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0.10) 160px, transparent 161px),
+        linear-gradient(135deg, #02541e 0%, #0f5426 45%, #064e1b 100%);
+    background-attachment: fixed;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
     display: flex;
