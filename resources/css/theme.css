@@ -33,6 +33,24 @@
     --bs-btn-focus-shadow-rgb: 29, 78, 216;
 }
 
+/* guru.css memberi .btn-success background langsung (bukan lewat
+   variabel), jadi variabel saja tidak cukup — timpa langsung di sini. */
+.btn-success {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #1e40af;
+    border-color: #1e40af;
+}
+
+.btn-success:active {
+    background-color: #1e3a8a;
+    border-color: #1e3a8a;
+}
+
 .btn-outline-primary,
 .btn-outline-success {
     --bs-btn-color: #1d4ed8;
