@@ -1,6 +1,16 @@
-# Runtime PHP-FPM. Aset frontend (public/build) sudah dibangun di host dan
-# ikut disalin lewat COPY . . — tidak bergantung pada npm di dalam image,
-# sehingga build tetap stabil meski jaringan/npm registry bermasalah.
+# Tahap 1: build aset frontend (Vite + Tailwind) dengan Node.
+# public/build tidak ada di repo, jadi harus dibangun saat image dibuat.
+FROM node:22-alpine AS frontend
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY vite.config.js ./
+COPY resources ./resources
+COPY public ./public
+RUN npm run build
+
+# Runtime PHP-FPM. Aset frontend (public/build) sudah dibangun di tahap
+# frontend di atas dan disalin lewat COPY --from=frontend.
 FROM php:8.4-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -25,6 +35,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 COPY . .
+
+COPY --from=frontend /app/public/build ./public/build
 
 # Install dependensi dari Packagist default + retry loop.
 # Tidak memakai mirror pihak ketiga (sering timeout) dan tidak memakai

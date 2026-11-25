@@ -1,0 +1,64 @@
+# Blueprint Render untuk Ujian Online (Laravel 13 + PostgreSQL).
+# Deploy dari file ini lewat Render Dashboard > New > Blueprint.
+# APP_KEY dan ADMIN_PASSWORD sengaja sync: false — isinya diisi di
+# dashboard Render, bukan di repo publik ini.
+services:
+  - type: web
+    name: ujian-online
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerCommand: sh -c "php artisan storage:link || true && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+    plan: free
+    envVars:
+      - key: APP_NAME
+        value: CBT Online - MTs Al-Abror
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        value: https://ujian-online.onrender.com
+      - key: APP_TIMEZONE
+        value: Asia/Jakarta
+      - key: LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: ujian-online-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ujian-online-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: ujian-online-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: ujian-online-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ujian-online-db
+          property: password
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: file
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+
+databases:
+  - name: ujian-online-db
+    plan: free
+    databaseName: db_ujian_online
+    user: postgres
