@@ -1,0 +1,13 @@
+# Konfigurasi deploy Railway untuk Ujian Online (Laravel 13 + PostgreSQL).
+# Railway otomatis memakai file ini saat service dibuat dari repo ini.
+# Database PostgreSQL ditambahkan terpisah di dashboard Railway, lalu
+# DB_URL di service ini diisi referensi ${{Postgres.DATABASE_URL}}.
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "sh -c \"php artisan storage:link || true && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=$PORT\""
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
