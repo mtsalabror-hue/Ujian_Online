@@ -97,6 +97,26 @@
         </li>
 
         <li>
+            <a href="{{ route('admin.upload-guru.index') }}"
+                class="{{ request()->routeIs('admin.upload-guru.*') ? 'active' : '' }}">
+                <span class="menu-label">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <span>Status Upload Guru</span>
+                </span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route('admin.hasil-siswa.index') }}"
+                class="{{ request()->routeIs('admin.hasil-siswa.*') ? 'active' : '' }}">
+                <span class="menu-label">
+                    <i class="bi bi-trophy"></i>
+                    <span>Hasil Siswa</span>
+                </span>
+            </a>
+        </li>
+
+        <li>
             <a href="{{ route('admin.pengaturan.index') }}"
                 class="{{ request()->routeIs('admin.pengaturan.*') ? 'active' : '' }}">
                 <span class="menu-label">

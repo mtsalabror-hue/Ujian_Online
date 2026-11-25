@@ -8,12 +8,15 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\HasilSiswaController;
+use App\Http\Controllers\Admin\ImpersonateController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\MataPelajaranController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\TahunAjaranController;
+use App\Http\Controllers\Admin\UploadGuruController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Guru\BankSoalController;
@@ -60,6 +63,18 @@ Route::post('/logout', [LoginController::class, 'logout'])
 
 /*
 |--------------------------------------------------------------------------
+| Kembali ke akun admin setelah masuk sebagai guru.
+| Di luar grup admin karena saat dipakai pengguna sedang login
+| sebagai guru (role admin tidak lagi berlaku).
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/kembali-ke-admin', [ImpersonateController::class, 'kembaliKeAdmin'])
+    ->middleware('auth')
+    ->name('impersonate.kembali');
+
+/*
+|--------------------------------------------------------------------------
 | Lupa Password
 |--------------------------------------------------------------------------
 */
@@ -85,6 +100,17 @@ Route::middleware(['auth', 'role:admin'])
             ->name('dashboard');
 
         Route::resource('guru', GuruController::class);
+
+        // Admin masuk sebagai guru (tanpa logout dari admin)
+        Route::post('guru/{guru}/masuk-sebagai-guru', [ImpersonateController::class, 'masukSebagaiGuru'])
+            ->name('guru.impersonate');
+
+        // Pantau status upload guru & hasil siswa
+        Route::get('upload-guru', [UploadGuruController::class, 'index'])
+            ->name('upload-guru.index');
+
+        Route::get('hasil-siswa', [HasilSiswaController::class, 'index'])
+            ->name('hasil-siswa.index');
 
         // Sub-routes untuk siswa harus DISEBELUM resource('siswa')
         Route::get('siswa/export/excel', [SiswaController::class, 'exportExcel'])
@@ -153,6 +179,12 @@ Route::middleware(['auth', 'role:guru'])
             [BankSoalController::class, 'templateDoc']
         )
             ->name('bank-soal.template.doc');
+
+        Route::get(
+            'bank-soal/mapel/{id_mapel}/download-word',
+            [BankSoalController::class, 'exportMapelWord']
+        )
+            ->name('bank-soal.export-mapel-word');
 
         Route::post(
             'bank-soal/import/doc',

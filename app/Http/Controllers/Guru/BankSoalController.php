@@ -9,9 +9,13 @@ use App\Models\DetailUjian;
 use App\Models\JawabanSiswa;
 use App\Models\Kelas;
 use App\Models\MataPelajaran;
+use App\Models\Setting;
 use App\Services\BankSoalDocParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\SimpleType\Jc;
 
 class BankSoalController extends Controller
 {
@@ -476,6 +480,118 @@ class BankSoalController extends Controller
     public function templateDoc()
     {
         return (new BankSoalTemplateDoc)->download();
+    }
+
+    /**
+     * Download seluruh bank soal milik guru untuk satu mata pelajaran
+     * sebagai dokumen Word (.docx): pertanyaan, pilihan jawaban
+     * (dengan jawaban benar ditandai), bobot, dan kelas.
+     */
+    public function exportMapelWord($id_mapel)
+    {
+        $this->authorizeMapel($id_mapel);
+
+        $guru = Auth::user()->guru;
+        $mapel = MataPelajaran::findOrFail($id_mapel);
+
+        $soalList = BankSoal::with('kelas')
+            ->where('id_guru', $guru?->id_guru)
+            ->where('id_mapel', $id_mapel)
+            ->orderBy('created_at')
+            ->get();
+
+        if ($soalList->isEmpty()) {
+            return back()->with('error', 'Belum ada soal untuk mata pelajaran ini.');
+        }
+
+        $setting = Setting::firstOrCreate(
+            [],
+            ['nama_sekolah' => 'SMK IT AL-ABROR']
+        );
+
+        $phpWord = new PhpWord;
+        $phpWord->setDefaultFontName('Calibri');
+        $phpWord->setDefaultFontSize(11);
+
+        $section = $phpWord->addSection();
+
+        // Kop sekolah + judul
+        $section->addText(
+            $setting->nama_sekolah ?? 'SMK IT AL-ABROR',
+            ['bold' => true, 'size' => 16],
+            ['alignment' => Jc::CENTER]
+        );
+        $section->addText(
+            'Bank Soal — ' . $mapel->nama_mapel,
+            ['size' => 13],
+            ['alignment' => Jc::CENTER]
+        );
+        $section->addTextBreak();
+
+        // Info
+        $info = [
+            'Mata Pelajaran' => $mapel->nama_mapel . ' (' . ($mapel->kode_mapel ?? '-') . ')',
+            'Guru'           => $guru->nama_guru ?? '-',
+            'Jumlah Soal'    => (string) $soalList->count() . ' soal',
+        ];
+        foreach ($info as $label => $value) {
+            $run = $section->addTextRun();
+            $run->addText($label . ' : ', ['bold' => true]);
+            $run->addText($value);
+        }
+        $section->addTextBreak();
+
+        // Daftar soal
+        foreach ($soalList as $i => $soal) {
+            $jenis = match ($soal->jenis_soal) {
+                'pilihan_ganda' => 'Pilihan Ganda',
+                'benar_salah'   => 'Benar / Salah',
+                'essay'         => 'Essay',
+                default         => $soal->jenis_soal,
+            };
+
+            $section->addText(
+                'Soal ' . ($i + 1) . ' (' . $jenis . ' — Bobot ' . $soal->bobot
+                    . ' — Kelas ' . ($soal->kelas->nama_kelas ?? 'Semua Kelas') . ')',
+                ['bold' => true]
+            );
+            $section->addText(html_entity_decode(strip_tags($soal->pertanyaan ?? '')));
+
+            if ($soal->jenis_soal === 'pilihan_ganda') {
+                foreach (['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D'] as $key => $huruf) {
+                    $opsi = $soal->{'opsi_' . $key};
+                    if ($opsi === null || $opsi === '') {
+                        continue;
+                    }
+
+                    $benar = strtoupper((string) $soal->jawaban_benar) === $huruf;
+                    $section->addText(
+                        $huruf . '. ' . html_entity_decode(strip_tags($opsi))
+                            . ($benar ? '  (Jawaban Benar)' : ''),
+                        $benar ? ['bold' => true] : []
+                    );
+                }
+            } elseif ($soal->jenis_soal === 'benar_salah') {
+                $section->addText('Jawaban benar: ' . $soal->jawaban_benar, ['bold' => true]);
+            } else {
+                $section->addText('Jawaban: essay (dinilai manual oleh guru).');
+            }
+
+            $section->addTextBreak();
+        }
+
+        $section->addText('Dicetak pada ' . now()->translatedFormat('d F Y'));
+
+        $writer = IOFactory::createWriter($phpWord, 'Word2007');
+
+        $filename = 'bank-soal_' . str_replace([' ', '/'], '_', ($mapel->nama_mapel ?? 'mapel'))
+            . '_' . now()->format('Ymd') . '.docx';
+
+        return response()->streamDownload(function () use ($writer) {
+            $writer->save('php://output');
+        }, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ]);
     }
 
     /**

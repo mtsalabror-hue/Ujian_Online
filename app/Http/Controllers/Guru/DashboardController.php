@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
+use App\Models\MataPelajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,7 @@ class DashboardController extends Controller
                 'totalUjian'    => 0,
                 'ujianAktif'    => 0,
                 'ujianTerbaru'  => collect(),
+                'mapelDownload' => collect(),
             ]);
         }
 
@@ -32,6 +34,16 @@ class DashboardController extends Controller
                 ->with('kelas')
                 ->latest()
                 ->take(5)
+                ->get(),
+            // Mata pelajaran yang punya soal, untuk download bank soal per mapel
+            'mapelDownload' => MataPelajaran::whereIn(
+                    'id_mapel',
+                    $guru->bankSoal()->distinct()->pluck('id_mapel')
+                )
+                ->withCount(['bankSoal' => function ($query) use ($guru) {
+                    $query->where('id_guru', $guru->id_guru);
+                }])
+                ->orderBy('nama_mapel')
                 ->get(),
         ]);
     }

@@ -128,6 +128,62 @@
 
     </div>
 
+    {{-- Download Bank Soal per Mata Pelajaran --}}
+    <div class="card shadow-sm border-0 mt-4">
+
+        <div class="card-header bg-white">
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-download me-2"></i>Download Bank Soal per Mata Pelajaran
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Jumlah Soal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @forelse($mapelDownload as $mapel)
+
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $mapel->nama_mapel }}</td>
+                            <td>{{ $mapel->bank_soal_count }} soal</td>
+                            <td>
+                                <a href="{{ route('guru.bank-soal.export-mapel-word', $mapel->id_mapel) }}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="bi bi-file-earmark-word me-1"></i> Download Word
+                                </a>
+                            </td>
+                        </tr>
+
+                        @empty
+
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Belum ada bank soal. Tambah soal dulu lewat menu Bank Soal.
+                            </td>
+                        </tr>
+
+                        @endforelse
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 @endsection

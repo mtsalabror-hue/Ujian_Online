@@ -92,6 +92,14 @@
                                 <a href="{{ route('admin.guru.edit', $item) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
+                                @if($item->user)
+                                <form action="{{ route('admin.guru.impersonate', $item) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-sm" title="Masuk sebagai guru ini">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                    </button>
+                                </form>
+                                @endif
                                 <form action="{{ route('admin.guru.destroy', $item) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')

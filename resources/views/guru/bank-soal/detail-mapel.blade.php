@@ -28,6 +28,9 @@
             </p>
         </div>
         <div class="d-flex gap-2">
+            <a href="{{ route('guru.bank-soal.export-mapel-word', $mapel->id_mapel) }}" class="btn btn-sm btn-primary mb-2">
+                <i class="bi bi-download me-1"></i> Download Bank Soal (Word)
+            </a>
             <a href="{{ route('guru.bank-soal.index') }}" class="btn btn-sm btn-outline-secondary mb-2">
                 <i class="bi bi-arrow-left me-1"></i> Kembali ke Bank Soal
             </a>
