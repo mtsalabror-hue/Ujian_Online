@@ -298,7 +298,7 @@
 
                         <li>Username akan menggunakan <strong>NIK</strong>.</li>
 
-                        <li>Password default adalah <strong>password123</strong>.</li>
+                        <li>Password default adalah <strong>NIK</strong> guru (sama dengan username).</li>
 
                         <li>Role otomatis menjadi <strong>Guru</strong>.</li>
 
