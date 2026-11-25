@@ -14,10 +14,8 @@ use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\TahunAjaranController;
-use App\Http\Controllers\Auth\GuruLoginController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
-use App\Http\Controllers\Auth\SiswaLoginController;
 use App\Http\Controllers\Guru\BankSoalController;
 use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
 use App\Http\Controllers\Guru\HasilUjianController;
@@ -31,49 +29,28 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/pilih-login', [LandingController::class, 'pilihLogin'])
     ->name('pilih.login');
 
-Route::get('/login', function () {
-    return redirect()->route('pilih.login');
-})->name('login');
-
 /*
 |--------------------------------------------------------------------------
-| Login Admin
+| Login Gabungan — satu form untuk admin, guru, dan siswa.
+| Rute login lama per peran dialihkan ke sini supaya tautan lama
+| (mis. /login/guru, /login/siswa, /login/admin) tidak rusak.
 |--------------------------------------------------------------------------
 */
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])
+    ->name('login');
 
 Route::get('/login/admin', function () {
-    return view('auth.login-admin');
+    return redirect()->route('login');
 })->name('login.admin');
 
-/*
-|--------------------------------------------------------------------------
-| Login Guru
-|--------------------------------------------------------------------------
-*/
+Route::get('/login/guru', function () {
+    return redirect()->route('login');
+})->name('login.guru');
 
-Route::get('/login/guru', [GuruLoginController::class, 'showLoginForm'])
-    ->name('login.guru');
-
-Route::post('/login/guru', [GuruLoginController::class, 'login'])
-    ->name('login.guru.process');
-
-/*
-|--------------------------------------------------------------------------
-| Login Siswa
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/login/siswa', [SiswaLoginController::class, 'showLoginForm'])
-    ->name('login.siswa');
-
-Route::post('/login/siswa', [SiswaLoginController::class, 'login'])
-    ->name('login.siswa.process');
-
-/*
-|--------------------------------------------------------------------------
-| Login Umum
-|--------------------------------------------------------------------------
-*/
+Route::get('/login/siswa', function () {
+    return redirect()->route('login');
+})->name('login.siswa');
 
 Route::post('/login', [LoginController::class, 'login'])
     ->name('login.process');

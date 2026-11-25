@@ -25,7 +25,7 @@
 </head>
 <body>
     <div class="header">
-        <h2>{{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}</h2>
+        <h2>{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</h2>
         <h3>Daftar Nilai Siswa</h3>
     </div>
     <hr>

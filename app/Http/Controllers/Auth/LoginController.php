@@ -2,27 +2,34 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
     /**
-     * Menampilkan halaman login admin/guru.
+     * Menampilkan halaman login gabungan untuk semua pengguna
+     * (admin, guru, dan siswa memakai satu form yang sama).
      */
     public function showLoginForm()
     {
-        return view('auth.login-admin');
-    }
-
-    public function showSiswaLoginForm()
-    {
-        return view('auth.login-siswa');
+        return view('auth.login');
     }
 
     /**
-     * Proses login admin/guru.
+     * Proses login gabungan.
+     *
+     * Identitas yang diterima:
+     * - Admin  : username
+     * - Guru   : username, NIK, nama guru, atau email
+     * - Siswa  : username, NIS, NISN, atau nama siswa
+     *
+     * Setelah password cocok, pengguna diarahkan sesuai rolenya.
      */
     public function login(Request $request)
     {
@@ -32,37 +39,74 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        // Proses autentikasi
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
+        $input = trim($credentials['username']);
 
-            $request->session()->regenerate();
+        // 1. Cari user secara langsung via username di tabel users.
+        $user = User::where('username', $input)->first();
 
-            $user = Auth::user();
+        // 2. Jika tidak ditemukan, cari via tabel guru
+        //    (berdasarkan NIK, nama guru, atau email).
+        if (!$user) {
+            $guru = Guru::where('nik', $input)
+                ->orWhere('nama_guru', $input)
+                ->orWhere('email', $input)
+                ->first();
 
-            // Cek status akun
-            if (!$user->status) {
-                Auth::logout();
-
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
-                return back()->withErrors([
-                    'username' => 'Akun Anda tidak aktif.',
-                ])->onlyInput('username');
+            if ($guru && $guru->user) {
+                $user = $guru->user;
             }
-
-            // Redirect berdasarkan role
-            return match ($user->role) {
-                'admin' => redirect()->route('admin.dashboard'),
-                'guru'  => redirect()->route('guru.dashboard'),
-                'siswa' => redirect()->route('siswa.ujian'),
-                default => $this->logout($request),
-            };
         }
 
-        return back()->withErrors([
-            'username' => 'Username atau password salah.',
-        ])->onlyInput('username');
+        // 3. Jika belum ditemukan, cari via tabel siswa
+        //    (berdasarkan NIS, NISN, atau nama siswa).
+        if (!$user) {
+            $siswa = Siswa::where('nis', $input)
+                ->orWhere('nisn', $input)
+                ->orWhere('nama_siswa', $input)
+                ->first();
+
+            if ($siswa && $siswa->user) {
+                $user = $siswa->user;
+            }
+        }
+
+        // 4. Verifikasi password jika user ditemukan.
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            return back()->withErrors([
+                'username' => 'Username / NIS / NIK atau password salah.',
+            ])->onlyInput('username');
+        }
+
+        // Cek status akun
+        if (!$user->status) {
+            return back()->withErrors([
+                'username' => 'Akun Anda tidak aktif. Hubungi administrator.',
+            ])->onlyInput('username');
+        }
+
+        // Cek kunci sementara siswa karena kecurangan (3x keluar dari ujian).
+        if ($user->role === 'siswa'
+            && $user->exam_locked_until
+            && $user->exam_locked_until->isFuture()
+        ) {
+            $menit = max(1, (int) ceil(now()->diffInMinutes($user->exam_locked_until)));
+
+            return back()->withErrors([
+                'username' => "Akun Anda dikunci karena kecurangan. Silakan coba lagi dalam ± {$menit} menit.",
+            ])->onlyInput('username');
+        }
+
+        Auth::login($user, $request->boolean('remember'));
+
+        $request->session()->regenerate();
+
+        // Redirect berdasarkan role
+        return match ($user->role) {
+            'admin' => redirect()->route('admin.dashboard'),
+            'guru'  => redirect()->route('guru.dashboard'),
+            'siswa' => redirect()->route('siswa.ujian'),
+            default => $this->logout($request),
+        };
     }
 
     /**
@@ -70,18 +114,11 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $role = Auth::user()?->role;
-
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return match ($role) {
-            'admin' => redirect()->route('login.admin'),
-            'guru'  => redirect()->route('login.guru'),
-            'siswa' => redirect()->route('login.siswa'),
-            default => redirect()->route('landing'),
-        };
+        return redirect()->route('login');
     }
 }

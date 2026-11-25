@@ -4,7 +4,7 @@
 
         <span class="navbar-brand fw-semibold mb-0 d-flex align-items-center">
             <img src="{{ !empty($setting->logo) ? asset('storage/' . $setting->logo) : asset('images/logoo.png') }}"
-                alt="Logo MTs Al-Abror"
+                alt="Logo SMK IT AL-ABROR"
                 class="me-2"
                 style="height: 32px; width: auto;">
             Dashboard Siswa

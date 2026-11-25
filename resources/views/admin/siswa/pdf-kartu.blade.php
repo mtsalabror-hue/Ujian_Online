@@ -33,7 +33,7 @@
                                     @endif
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <div class="title-school">{{ $setting->nama_sekolah ?? 'MTs AL-ABROR' }}</div>
+                                    <div class="title-school">{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</div>
                                     <div class="title-exam">KARTU PESERTA {{ strtoupper($namaUjian) }}</div>
                                     <div class="title-ta">Tahun Ajaran {{ $tahunAjaran }}</div>
                                 </td>

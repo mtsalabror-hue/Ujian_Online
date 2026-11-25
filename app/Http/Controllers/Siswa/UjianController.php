@@ -50,7 +50,7 @@ class UjianController extends Controller
 
         if (!$siswa) {
             Auth::logout();
-            return redirect()->route('login.siswa')
+            return redirect()->route('login')
                 ->withErrors(['username' => 'Data siswa tidak ditemukan. Hubungi administrator.']);
         }
 

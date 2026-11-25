@@ -11,8 +11,13 @@ class LandingController extends Controller
         return view('landing.index');
     }
 
+    /**
+     * Halaman pilih jenis pengguna sudah tidak dipakai lagi —
+     * semua pengguna login lewat satu form di /login.
+     * Rute lama dialihkan ke sana supaya tautan lama tidak rusak.
+     */
     public function pilihLogin()
     {
-        return view('landing.pilih-login');
+        return redirect()->route('login');
     }
 }

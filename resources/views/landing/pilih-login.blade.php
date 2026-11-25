@@ -12,7 +12,7 @@
         class="mb-2 img-fluid">
 
     <h2 class="cbt-title" style="font-size: 1.9rem;">
-        {{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}
+        {{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}
     </h2>
 
     <div class="cbt-subtitle-1" style="font-size: 1.05rem;">

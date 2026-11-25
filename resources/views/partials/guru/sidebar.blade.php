@@ -5,7 +5,7 @@
             alt="Logo"
             width="65"
             class="mb-2">
-        <h5 class="mb-0 text-white fw-bold fs-6">{{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}</h5>
+        <h5 class="mb-0 text-white fw-bold fs-6">{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</h5>
         <small class="text-white-50">Panel Guru</small>
     </div>
 

@@ -1,13 +1,14 @@
 /* ==========================================================
    CBT THEME & LANDING / AUTH LAYOUT STYLES
+   Palet: navy gelap + indigo + aksen amber (bukan hijau).
 ========================================================== */
 
 body.cbt-theme {
     /* Latar murni kodingan (CSS), tanpa gambar background-cbt.png */
     background:
-        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.14) 0, rgba(255, 255, 255, 0.14) 120px, transparent 121px),
-        radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0.10) 160px, transparent 161px),
-        linear-gradient(135deg, #02541e 0%, #0f5426 45%, #064e1b 100%);
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 120px, transparent 121px),
+        radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.16) 0, rgba(245, 158, 11, 0.16) 160px, transparent 161px),
+        linear-gradient(135deg, #0b1530 0%, #1e3a8a 55%, #0b1530 100%);
     background-attachment: fixed;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
@@ -31,7 +32,7 @@ body.cbt-theme {
 .cbt-title {
     font-size: 2.1rem;
     font-weight: 800;
-    color: #064e1b;
+    color: #172554;
     letter-spacing: 0.5px;
     margin-bottom: 2px;
 }
@@ -39,14 +40,14 @@ body.cbt-theme {
 .cbt-subtitle-1 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #475569;
     margin-bottom: 2px;
 }
 
 .cbt-subtitle-2 {
     font-size: 1.05rem;
     font-weight: 700;
-    color: #064e1b;
+    color: #1e3a8a;
     margin-bottom: 12px;
 }
 
@@ -65,15 +66,52 @@ body.cbt-theme {
     content: "";
     flex: 1;
     height: 3px;
-    border-top: 1px solid #0f5426;
-    border-bottom: 1px solid #0f5426;
+    border-top: 1px solid #f59e0b;
+    border-bottom: 1px solid #f59e0b;
 }
 
 .cbt-divider-icon {
     padding: 0 10px;
-    color: #0f5426;
+    color: #d97706;
     font-size: 18px;
     line-height: 1;
+}
+
+/* Hero Card (landing) */
+.cbt-hero-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    border-top: 5px solid #f59e0b;
+    padding: 42px 36px 32px;
+    max-width: 560px;
+    width: 100%;
+}
+
+.cbt-hero-desc {
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 4px auto 0;
+}
+
+.cbt-hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.cbt-hero-meta i {
+    color: #1d4ed8;
+    margin-right: 5px;
 }
 
 /* Cards */
@@ -108,14 +146,14 @@ body.cbt-theme {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 2px solid #0f5426;
+    border: 2px solid #1d4ed8;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 15px;
-    color: #0f5426;
+    color: #1d4ed8;
     font-size: 38px;
-    background: rgba(15, 84, 38, 0.05);
+    background: rgba(29, 78, 216, 0.06);
 }
 
 .cbt-card-header-badge {
@@ -129,27 +167,36 @@ body.cbt-theme {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid #0f5426;
+    border: 2px solid #1d4ed8;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0f5426;
+    color: #1d4ed8;
     font-size: 24px;
-    background: rgba(15, 84, 38, 0.05);
+    background: rgba(29, 78, 216, 0.06);
     flex-shrink: 0;
 }
 
 .cbt-card-title {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #064e1b;
+    color: #172554;
     letter-spacing: 0.5px;
     margin: 0;
 }
 
+/* Links */
+.cbt-link {
+    color: #1d4ed8;
+}
+
+.cbt-link:hover {
+    color: #1e40af;
+}
+
 /* Buttons */
 .btn-cbt-main {
-    background-color: #0f5426;
+    background-color: #1d4ed8;
     color: #ffffff;
     font-weight: 700;
     font-size: 1rem;
@@ -157,22 +204,22 @@ body.cbt-theme {
     padding: 12px 35px;
     border-radius: 8px;
     border: none;
-    box-shadow: 0 4px 12px rgba(15, 84, 38, 0.25);
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
     transition: all 0.2s ease;
     text-transform: uppercase;
 }
 
 .btn-cbt-main:hover,
 .btn-cbt-main:focus {
-    background-color: #093b1a;
+    background-color: #1e40af;
     color: #ffffff;
-    box-shadow: 0 6px 16px rgba(15, 84, 38, 0.35);
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.4);
 }
 
 .btn-cbt-admin {
     background: #ffffff;
-    color: #0f5426;
-    border: 1.5px solid #0f5426;
+    color: #1d4ed8;
+    border: 1.5px solid #1d4ed8;
     border-radius: 8px;
     padding: 10px 24px;
     font-weight: 700;
@@ -185,9 +232,9 @@ body.cbt-theme {
 }
 
 .btn-cbt-admin:hover {
-    background: #f0fdf4;
-    color: #064e1b;
-    border-color: #064e1b;
+    background: #eff6ff;
+    color: #172554;
+    border-color: #172554;
 }
 
 /* Form Inputs */
@@ -203,8 +250,8 @@ body.cbt-theme {
 }
 
 .cbt-input-group:focus-within {
-    border-color: #0f5426;
-    box-shadow: 0 0 0 3px rgba(15, 84, 38, 0.15);
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
 }
 
 .cbt-input-group .input-icon-left {
@@ -229,7 +276,7 @@ body.cbt-theme {
 }
 
 .cbt-input-group .toggle-password:hover {
-    color: #0f5426;
+    color: #1d4ed8;
 }
 
 /* Footer Bar */
@@ -239,7 +286,7 @@ body.cbt-theme {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: #02541E;
+    background-color: #0b1530;
     color: #ffffff;
     padding: 12px 35px;
     font-size: 0.88rem;
@@ -256,5 +303,9 @@ body.cbt-theme {
         text-align: center;
         gap: 6px;
         padding: 10px 15px;
+    }
+
+    .cbt-hero-card {
+        padding: 32px 22px 26px;
     }
 }

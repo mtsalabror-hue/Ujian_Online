@@ -191,7 +191,7 @@ class HasilUjianController extends Controller
 
         $setting = Setting::firstOrCreate(
             [],
-            ['nama_sekolah' => 'MTs Al-Abror']
+            ['nama_sekolah' => 'SMK IT AL-ABROR']
         );
 
         $phpWord = new PhpWord;
@@ -202,7 +202,7 @@ class HasilUjianController extends Controller
 
         // Kop sekolah + judul
         $section->addText(
-            $setting->nama_sekolah ?? 'MTs Al-Abror',
+            $setting->nama_sekolah ?? 'SMK IT AL-ABROR',
             ['bold' => true, 'size' => 16],
             ['alignment' => Jc::CENTER]
         );
@@ -350,7 +350,7 @@ class HasilUjianController extends Controller
 
         $setting = Setting::firstOrCreate(
             [],
-            ['nama_sekolah' => 'MTs Al-Abror']
+            ['nama_sekolah' => 'SMK IT AL-ABROR']
         );
 
         $phpWord = new PhpWord;
@@ -361,7 +361,7 @@ class HasilUjianController extends Controller
 
         // Kop sekolah + judul
         $section->addText(
-            $setting->nama_sekolah ?? 'MTs Al-Abror',
+            $setting->nama_sekolah ?? 'SMK IT AL-ABROR',
             ['bold' => true, 'size' => 16],
             ['alignment' => Jc::CENTER]
         );

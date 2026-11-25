@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class MataPelajaranSeeder extends Seeder
 {
     /**
-     * Seed mata pelajaran sesuai daftar resmi MTs Al-Abror (17 mapel,
+     * Seed mata pelajaran sesuai daftar resmi SMK IT AL-ABROR (17 mapel,
      * dari dokumen sekolah 10 Nov 2026).
      * Idempotent — aman dijalankan berulang (updateOrCreate by kode_mapel).
      *

@@ -184,7 +184,7 @@
             {{-- Dokumen cetak: isinya sama persis dengan file Word yang di-download --}}
             <div class="print-only">
                 <div class="text-center mb-3">
-                    <h4 class="fw-bold mb-0">{{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}</h4>
+                    <h4 class="fw-bold mb-0">{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</h4>
                     <p class="mb-0">Daftar Nilai Siswa</p>
                 </div>
 
@@ -376,7 +376,7 @@
             {{-- Dokumen cetak: isinya sama persis dengan file Word yang di-download --}}
             <div class="print-only">
                 <div class="text-center mb-3">
-                    <h4 class="fw-bold mb-0">{{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}</h4>
+                    <h4 class="fw-bold mb-0">{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</h4>
                     <p class="mb-0">Daftar Nilai Mata Pelajaran</p>
                 </div>
 

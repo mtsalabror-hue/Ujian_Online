@@ -12,14 +12,15 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     *
+     * Kelas dan mata pelajaran TIDAK di-seed otomatis — keduanya
+     * diinput sendiri oleh pengguna lewat panel admin.
      */
     public function run(): void
     {
         $this->call([
             AdminSeeder::class,
             SettingSeeder::class,
-            MataPelajaranSeeder::class,
-            SiswaSeeder::class,
         ]);
     }
 }

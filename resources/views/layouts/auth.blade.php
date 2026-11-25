@@ -20,7 +20,7 @@
     </div>
 
     <footer class="cbt-footer">
-        <div>&copy; {{ date('Y') }} {{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}. All rights reserved.</div>
+        <div>&copy; {{ date('Y') }} {{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}. All rights reserved.</div>
         <div>Dzikir &bull; Fikir &bull; Ikhtiar</div>
     </footer>
 

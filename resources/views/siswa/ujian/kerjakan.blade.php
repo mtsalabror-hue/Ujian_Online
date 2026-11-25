@@ -256,7 +256,7 @@
                 <p class="text-danger fw-bold mb-0" id="dikunciInfo">Akun dikunci selama 5 menit.</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <a href="{{ route('login.siswa') }}" class="btn btn-secondary">
+                <a href="{{ route('login') }}" class="btn btn-secondary">
                     <i class="bi bi-box-arrow-right me-1"></i> Ke Halaman Login
                 </a>
             </div>
@@ -269,7 +269,7 @@
         totalSoal: parseInt("{{ $soal->count() }}", 10),
         saveUrl: "{{ route('siswa.ujian.jawaban', $ujian->id_ujian) }}",
         pelanggaranUrl: "{{ route('siswa.ujian.pelanggaran', $ujian->id_ujian) }}",
-        loginUrl: "{{ route('login.siswa') }}",
+        loginUrl: "{{ route('login') }}",
         csrfToken: "{{ csrf_token() }}",
         sisaDetik: parseInt("{{ $sisaDetik }}", 10)
     };

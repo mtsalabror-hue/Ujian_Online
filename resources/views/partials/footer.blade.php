@@ -6,7 +6,7 @@
 
             © {{ date('Y') }}
 
-            <strong>{{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}</strong>
+            <strong>{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</strong>
 
             | Computer Based Test
 

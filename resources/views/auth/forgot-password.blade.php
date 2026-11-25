@@ -71,7 +71,7 @@
 
                 {{-- Back Navigation --}}
                 <div class="d-flex justify-content-center mt-3 pt-2 border-top">
-                    <a href="{{ route('pilih.login') }}" class="text-decoration-none text-secondary small">
+                    <a href="{{ route('login') }}" class="text-decoration-none text-secondary small">
                         <i class="bi bi-arrow-left me-1"></i> Kembali ke Pilih Role Login
                     </a>
                 </div>

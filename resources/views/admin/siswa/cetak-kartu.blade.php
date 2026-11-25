@@ -207,7 +207,7 @@
                     onerror="this.src='https://via.placeholder.com/60?text=LOGO'">
                 @endif
                 <div class="card-ujian-title">
-                    <h5>{{ $setting->nama_sekolah ?? 'MTs AL-ABROR' }}</h5>
+                    <h5>{{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}</h5>
                     <h6>KARTU PESERTA {{ strtoupper($namaUjian) }}</h6>
                     <p>Tahun Ajaran {{ $tahunAjaran }}</p>
                 </div>

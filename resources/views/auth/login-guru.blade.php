@@ -14,7 +14,7 @@
                 class="mb-3 img-fluid">
 
             <h1 class="cbt-title" style="font-size: 2.2rem;">
-                {{ $setting->nama_sekolah ?? 'MTs Al-Abror' }}
+                {{ $setting->nama_sekolah ?? 'SMK IT AL-ABROR' }}
             </h1>
 
             <div class="cbt-subtitle-1" style="font-size: 1.15rem;">
