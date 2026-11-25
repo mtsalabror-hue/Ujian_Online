@@ -8,3 +8,6 @@
 @import "./guru.css";
 
 @import "./responsive.css";
+
+/* Tema dashboard (navy/indigo/amber) — paling akhir supaya menimpa semua. */
+@import "./theme.css";

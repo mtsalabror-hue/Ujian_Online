@@ -114,6 +114,15 @@ body.cbt-theme {
     margin-right: 5px;
 }
 
+/* Branding di halaman login (mode desktop): teks terang di atas latar gelap */
+.cbt-brand .cbt-title {
+    color: #ffffff;
+}
+
+.cbt-brand .cbt-subtitle-1 {
+    color: #e2e8f0;
+}
+
 /* Cards */
 .cbt-card {
     background: #ffffff;

@@ -7,7 +7,7 @@
     <div class="row align-items-center justify-content-center g-4">
 
         {{-- Branding Info Column (Left) --}}
-        <div class="col-lg-6 col-md-6 text-center d-none d-md-block">
+        <div class="col-lg-6 col-md-6 text-center d-none d-md-block cbt-brand">
             <img src="{{ !empty($setting->logo) ? asset('storage/' . $setting->logo) : asset('images/logoo.png') }}"
                 alt="Logo sekolah"
                 width="140"
