@@ -7,6 +7,8 @@
 
     <div class="wrapper">
 
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
         @include('partials.guru.sidebar')
 
         <div class="main">
@@ -40,6 +42,8 @@
         </div>
 
     </div>
+
+    @include('partials.guru.bottomnav')
 
     @include('partials.scripts')
 

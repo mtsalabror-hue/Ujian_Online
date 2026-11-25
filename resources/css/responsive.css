@@ -174,3 +174,82 @@
         font-size: .8rem;
     }
 }
+
+/* ==========================================================
+   BOTTOM NAVIGATION (HP, < 768px)
+   Menggantikan sidebar kiri di layar kecil.
+========================================================== */
+
+.bottom-nav {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1030;
+        background: #ffffff;
+        border-top: 1px solid #e2e8f0;
+        box-shadow: 0 -2px 12px rgba(11, 21, 48, .08);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    .bottom-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        min-width: 0;
+        padding: 8px 2px 7px;
+        color: #64748b;
+        text-decoration: none;
+        background: none;
+        border: none;
+        font-family: inherit;
+        cursor: pointer;
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+
+    .bottom-nav-item span {
+        font-size: .65rem;
+        font-weight: 600;
+        line-height: 1.1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .bottom-nav-item.active {
+        color: #1d4ed8;
+    }
+
+    .bottom-nav-item:active {
+        background: #eff6ff;
+    }
+
+    /* Beri ruang di bawah konten & footer supaya tidak tertutup nav bawah */
+    .wrapper > .main {
+        padding-bottom: 72px;
+    }
+
+    /* Panah dropdown sidebar berputar saat submenu terbuka */
+    .sidebar .dropdown-btn .bi-chevron-down {
+        transition: transform .25s ease;
+    }
+
+    .sidebar .dropdown-btn .bi-chevron-down.rotated {
+        transform: rotate(180deg);
+    }
+}

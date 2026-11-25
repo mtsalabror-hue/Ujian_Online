@@ -7,6 +7,8 @@
 
     <div class="wrapper">
 
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
         @include('partials.admin.sidebar')
 
         <div class="main">
@@ -22,6 +24,8 @@
         </div>
 
     </div>
+
+    @include('partials.admin.bottomnav')
 
     @include('partials.scripts')
 
