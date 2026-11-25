@@ -46,7 +46,7 @@ class SiswaController extends Controller
             // Pertahankan filter + pencarian saat pindah halaman.
             ->withQueryString();
 
-        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         return view('admin.siswa.index', compact('siswa', 'kelasList'));
     }
@@ -56,7 +56,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $kelas = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelas = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         return view('admin.siswa.create', compact('kelas'));
     }
@@ -123,7 +123,7 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        $kelas = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelas = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         return view('admin.siswa.edit', compact('siswa', 'kelas'));
     }
@@ -259,7 +259,7 @@ class SiswaController extends Controller
         $namaPenandatangan = $request->nama_penandatangan ?? ($setting->kepala_sekolah ?? '');
         $nipPenandatangan = $request->nip_penandatangan ?? '';
 
-        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         $siswa = Siswa::with(['kelas', 'user'])
             ->when($idKelas, function ($query) use ($idKelas) {

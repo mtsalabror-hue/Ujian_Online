@@ -86,7 +86,7 @@ class BankSoalController extends Controller
     public function create(Request $request)
     {
         $mataPelajaran = $this->mapelUntukGuru();
-        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
         $selectedMapelId = $request->query('id_mapel');
         $selectedKelasId = $request->query('id_kelas');
 

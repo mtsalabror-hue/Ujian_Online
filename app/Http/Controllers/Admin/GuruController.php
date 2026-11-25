@@ -38,7 +38,7 @@ class GuruController extends Controller
     public function create()
     {
         $mapel = MataPelajaran::orderBy('nama_mapel')->get();
-        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         return view('admin.guru.create', compact('mapel', 'kelasList'));
     }
@@ -110,7 +110,7 @@ class GuruController extends Controller
     {
         $guru->load('mataPelajaran', 'kelas');
         $mapel = MataPelajaran::orderBy('nama_mapel')->get();
-        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelasList = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
 
         return view('admin.guru.edit', compact('guru', 'mapel', 'kelasList'));
     }

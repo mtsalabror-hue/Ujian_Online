@@ -24,7 +24,7 @@ class KelasController extends Controller
                 $query->where('nama_kelas', 'like', "%{$keyword}%")
                     ->orWhere('tingkat', 'like', "%{$keyword}%");
             })
-            ->orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")
+            ->orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")
             ->orderBy('nama_kelas')
             ->paginate(10);
 
@@ -45,7 +45,7 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tingkat' => 'required|in:VII,VIII,IX',
+            'tingkat' => 'required|in:X,XI,XII',
             'nama_kelas' => 'required|max:20|unique:kelas,nama_kelas',
         ]);
 
@@ -85,7 +85,7 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'tingkat' => 'required|in:VII,VIII,IX',
+            'tingkat' => 'required|in:X,XI,XII',
             'nama_kelas' => 'required|max:20|unique:kelas,nama_kelas,' . $kelas->id_kelas . ',id_kelas',
         ]);
 

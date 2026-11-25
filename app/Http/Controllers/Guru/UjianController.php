@@ -124,7 +124,7 @@ class UjianController extends Controller
     public function create()
     {
         $mataPelajaran = $this->mapelUntukGuru();
-        $kelas         = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelas         = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
         $tahunAjaran   = TahunAjaran::all();
         $bankSoal      = BankSoal::with('mataPelajaran')
             ->where('id_guru', $this->getGuruId())
@@ -202,7 +202,7 @@ class UjianController extends Controller
         $this->authorizeUjian($ujian);
 
         $mataPelajaran = $this->mapelUntukGuru();
-        $kelas         = Kelas::orderByRaw("CASE tingkat WHEN 'VII' THEN 1 WHEN 'VIII' THEN 2 WHEN 'IX' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
+        $kelas         = Kelas::orderByRaw("CASE tingkat WHEN 'X' THEN 1 WHEN 'XI' THEN 2 WHEN 'XII' THEN 3 ELSE 4 END")->orderBy('nama_kelas')->get();
         $tahunAjaran   = TahunAjaran::all();
 
         return view('guru.ujian.edit', compact('ujian', 'mataPelajaran', 'kelas', 'tahunAjaran'));
